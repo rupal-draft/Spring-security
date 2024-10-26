@@ -9,8 +9,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -19,6 +17,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleResourceNotFoundException(ResourceNotFound e){
         ApiError apiError = new ApiError(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(apiError,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleInternalServerErrorException(Exception e){
+        ApiError apiError = new ApiError(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(apiError,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

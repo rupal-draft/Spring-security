@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) userRepository
+        return  userRepository
                 .findByEmail(username)
                 .orElseThrow(
                         ()-> new BadCredentialsException("Account not found with this email:"+username)
@@ -45,4 +45,11 @@ public class UserService implements UserDetailsService {
         return modelMapper.map(userRepository.save(userEntity),UserDto.class);
     }
 
+    public UserEntity getUserFromId(Long userId) {
+        return userRepository
+                .findById(userId)
+                .orElseThrow(
+                        ()->new ResourceNotFound("No user found with this id:"+userId)
+                );
+    }
 }
