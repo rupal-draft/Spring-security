@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .nav {
+            margin: 20px 0;
+        }
+        .nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .token {
+            margin-top: 20px;
+            color: #333;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to the Home Page</h1>
+</header>
+<div class="container">
+    <p>This is the basic home page of your application. Use the links below to navigate.</p>
+    <div class="nav">
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+        <a href="/profile">Profile</a>
+    </div>
+    <div class="token" id="tokenDisplay">
+    </div>
+</div>
+
+<script>
+    function getTokenFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('token');
+    }
+    const token = getTokenFromUrl();
+    if (token) {
+        document.getElementById('tokenDisplay').innerHTML = `<strong>Token:</strong> ${token}`;
+    } else {
+        document.getElementById('tokenDisplay').innerHTML = "No token found in the URL.";
+    }
+</script>
+</body>
+</html>

@@ -52,4 +52,14 @@ public class UserService implements UserDetailsService {
                         ()->new ResourceNotFound("No user found with this id:"+userId)
                 );
     }
+
+    public UserEntity findByEmail(String email) {
+        return  userRepository
+                .findByEmail(email)
+                .orElse(null);
+    }
+
+    public UserEntity saveUser(UserEntity toBeSavedUser) {
+        return userRepository.save(toBeSavedUser);
+    }
 }
